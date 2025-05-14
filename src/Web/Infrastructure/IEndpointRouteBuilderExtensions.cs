@@ -2,6 +2,8 @@
 
 namespace CleanArchitectureBase.Web.Infrastructure;
 
+//Vai trò: Sử dụng IEndpointRouteBuilder để gán thêm metadata xác định loại http method (GET, POST, PUT, DELETE,...)
+//và trả về builder để có thể tùy chỉnh thêm
 public static class IEndpointRouteBuilderExtensions
 {
     public static IEndpointRouteBuilder MapGet(this IEndpointRouteBuilder builder, Delegate handler, [StringSyntax("Route")] string pattern = "")

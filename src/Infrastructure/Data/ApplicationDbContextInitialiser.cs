@@ -23,7 +23,7 @@ public static class InitialiserExtensions
         await initialiser.SeedAsync();
     }
 }
-
+//Vai trò: Khởi tạo và nạp dữ liệu cho cơ sở dữ liệu
 public class ApplicationDbContextInitialiser
 {
     private readonly ILogger<ApplicationDbContextInitialiser> _logger;

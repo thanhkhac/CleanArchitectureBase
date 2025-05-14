@@ -2,8 +2,10 @@
 
 namespace CleanArchitectureBase.Web.Infrastructure;
 
+//Vai trò: Map các API
 public static class WebApplicationExtensions
 {
+    //Vai trò: ?
     public static RouteGroupBuilder MapGroup(this WebApplication app, EndpointGroupBase group)
     {
         var groupName = group.GetType().Name;
@@ -14,7 +16,9 @@ public static class WebApplicationExtensions
             .WithTags(groupName)
             .WithOpenApi();
     }
-
+    
+    //Vai trò: Tìm các class kế thừa từ EndpointGroupBase và gọi hàm Map của EndpointGroupBase
+    //Hàm Map của EndpointGroupBase sẽ gọi tới hàm MapGroup (ở trên)
     public static WebApplication MapEndpoints(this WebApplication app)
     {
         var endpointGroupType = typeof(EndpointGroupBase);
