@@ -5,6 +5,8 @@ using CleanArchitectureBase.Application.Common.Security;
 
 namespace CleanArchitectureBase.Application.Common.Behaviours;
 
+//Vai trò: thực hiện ủy quyền người dùng
+//Cơ chế: bao gồm cả phân quyền theo role và phân quyền theo policy (Check trong database, không phải trong jwt)
 public class AuthorizationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
 {
     private readonly IUser _user;

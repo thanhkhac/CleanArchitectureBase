@@ -5,7 +5,7 @@ using CleanArchitectureBase.Domain.Enums;
 
 namespace CleanArchitectureBase.Application.TodoLists.Queries.GetTodos;
 
-[Authorize]
+// [Authorize]
 public record GetTodosQuery : IRequest<TodosVm>;
 
 public class GetTodosQueryHandler : IRequestHandler<GetTodosQuery, TodosVm>

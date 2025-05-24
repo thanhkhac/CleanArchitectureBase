@@ -19,8 +19,9 @@ public static class InitialiserExtensions
         var initialiser = scope.ServiceProvider.GetRequiredService<ApplicationDbContextInitialiser>();
 
         await initialiser.InitialiseAsync();
-
+        
         await initialiser.SeedAsync();
+        // await Task.CompletedTask;
     }
 }
 //Vai trò: Khởi tạo và nạp dữ liệu cho cơ sở dữ liệu

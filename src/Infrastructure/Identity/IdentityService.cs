@@ -31,11 +31,7 @@ public class IdentityService : IIdentityService
 
     public async Task<(Result Result, string UserId)> CreateUserAsync(string userName, string password)
     {
-        var user = new ApplicationUser
-        {
-            UserName = userName,
-            Email = userName,
-        };
+        var user = new ApplicationUser { UserName = userName, Email = userName, };
 
         var result = await _userManager.CreateAsync(user, password);
 
@@ -74,7 +70,8 @@ public class IdentityService : IIdentityService
 
     public async Task<Result> DeleteUserAsync(ApplicationUser user)
     {
-        var result = await _userManager.DeleteAsync(user);
+        user.IsDeleted = true;
+        var result = await _userManager.UpdateAsync(user);
 
         return result.ToApplicationResult();
     }

@@ -4,8 +4,8 @@ using CleanArchitectureBase.Domain.Constants;
 
 namespace CleanArchitectureBase.Application.TodoLists.Commands.PurgeTodoLists;
 
-[Authorize(Roles = Roles.Administrator)]
-[Authorize(Policy = Policies.CanPurge)]
+// [Authorize(Roles = Roles.Administrator)]
+// [Authorize(Policy = Policies.CanPurge)]
 public record PurgeTodoListsCommand : IRequest;
 
 public class PurgeTodoListsCommandHandler : IRequestHandler<PurgeTodoListsCommand>

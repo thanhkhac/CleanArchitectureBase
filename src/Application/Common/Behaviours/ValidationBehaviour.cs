@@ -1,4 +1,5 @@
-﻿using ValidationException = CleanArchitectureBase.Application.Common.Exceptions.ValidationException;
+﻿using CleanArchitectureBase.Application.Common.Exceptions;
+using ValidationException = CleanArchitectureBase.Application.Common.Exceptions.ValidationException;
 
 namespace CleanArchitectureBase.Application.Common.Behaviours;
 
@@ -28,7 +29,7 @@ public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TReque
                 .ToList();
 
             if (failures.Any())
-                throw new ValidationException(failures);
+                throw new ErrorCodeException(failures);
         }
         return await next();
     }
