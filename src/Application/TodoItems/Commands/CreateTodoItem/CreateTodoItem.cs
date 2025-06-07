@@ -11,6 +11,17 @@ public record CreateTodoItemCommand : IRequest<int>
     public string? Title { get; init; }
 }
 
+
+public class CreateTodoItemCommandValidator : AbstractValidator<CreateTodoItemCommand>
+{
+    public CreateTodoItemCommandValidator()
+    {
+        RuleFor(v => v.Title)
+            .MaximumLength(200)
+            .NotEmpty();
+    }
+}
+
 public class CreateTodoItemCommandHandler : IRequestHandler<CreateTodoItemCommand, int>
 {
     private readonly IApplicationDbContext _context;

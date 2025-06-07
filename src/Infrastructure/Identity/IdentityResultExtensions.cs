@@ -9,6 +9,11 @@ public static class IdentityResultExtensions
     {
         return result.Succeeded
             ? Result.Success()
-            : Result.Failure(result.Errors.Select(e => e.Description));
+            : Result.Failure(result.Errors
+                .GroupBy(e => e.Code)
+                .ToDictionary(
+                    g => g.Key,
+                    g => g.Select(e => e.Description).ToArray()
+                ));
     }
 }

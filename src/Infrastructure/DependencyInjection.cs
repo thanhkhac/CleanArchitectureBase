@@ -14,11 +14,14 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
+        //Lấy CNS từ appsetting
         var connectionString = configuration.GetConnectionString("DefaultConnection");
 
         Guard.Against.Null(connectionString, message: "Connection string 'DefaultConnection' not found.");
-
+        
+        //Cấu hình Interceptor cho Database
         services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();
+        //Cấu hình Interceptor cho xử lý Event
         services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
 
         services.AddDbContext<ApplicationDbContext>((sp, options) =>
@@ -41,7 +44,8 @@ public static class DependencyInjection
             .AddIdentityCore<ApplicationUser>()
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
-            .AddApiEndpoints();
+            .AddApiEndpoints()
+            .AddErrorDescriber<CustomIdentityErrorDescriber>();;
 
         services.AddSingleton(TimeProvider.System);
         services.AddTransient<IIdentityService, IdentityService>();

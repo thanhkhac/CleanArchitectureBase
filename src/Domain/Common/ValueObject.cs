@@ -5,6 +5,7 @@ public abstract class ValueObject
 {
     protected static bool EqualOperator(ValueObject left, ValueObject right)
     {
+        //Toán tử ^ - XOR: trả về true nếu hai giá trị đầu vào khác nhau
         if (left is null ^ right is null)
         {
             return false;
@@ -18,15 +19,17 @@ public abstract class ValueObject
         return !(EqualOperator(left, right));
     }
 
+    //Phương thức trừu tượng, yêu cầu class con triển khai để trả về các properties được sử dụng để để so sánh
     protected abstract IEnumerable<object> GetEqualityComponents();
 
     public override bool Equals(object? obj)
     {
+        //NULL hoặc khác kiểu 
         if (obj == null || obj.GetType() != GetType())
         {
             return false;
         }
-
+        //Ép kiểu
         var other = (ValueObject)obj;
         return GetEqualityComponents().SequenceEqual(other.GetEqualityComponents());
     }

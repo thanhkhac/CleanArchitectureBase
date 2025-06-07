@@ -2,22 +2,22 @@
 
 public class Result
 {
-    internal Result(bool succeeded, IEnumerable<string> errors)
+    internal Result(bool succeeded, IDictionary<string, string[]> errors)
     {
         Succeeded = succeeded;
-        Errors = errors.ToArray();
+        Errors = errors;
     }
 
     public bool Succeeded { get; init; }
 
-    public string[] Errors { get; init; }
+    public IDictionary<string, string[]> Errors { get; init; }
 
     public static Result Success()
     {
-        return new Result(true, Array.Empty<string>());
+        return new Result(true, new Dictionary<string, string[]>());
     }
 
-    public static Result Failure(IEnumerable<string> errors)
+    public static Result Failure(IDictionary<string, string[]> errors)
     {
         return new Result(false, errors);
     }

@@ -1,4 +1,5 @@
-﻿using FluentValidation.Results;
+﻿using CleanArchitectureBase.Application.Common.Models;
+using FluentValidation.Results;
 
 namespace CleanArchitectureBase.Application.Common.Exceptions;
 
@@ -18,15 +19,18 @@ public class ErrorCodeException : Exception
     {
         Errors[errorCode] = new[] { message };
     }
-
-    public ErrorCodeException(IEnumerable<(string ErrorCode, string Message)> errors)
+    
+    public ErrorCodeException(string[] errors)
     {
-        Errors = errors
-            .GroupBy(e => e.ErrorCode)
-            .ToDictionary(
-                g => g.Key,
-                g => g.Select(e => e.Message).ToArray()
-            );
+        Errors = errors.ToDictionary(
+            error => error,
+            error => new string[0]
+        );
+    }
+
+    public ErrorCodeException(IDictionary<string, string[]> errors)
+    {
+        Errors = errors;
     }
 
     public ErrorCodeException(IEnumerable<ValidationFailure> validationFailures)

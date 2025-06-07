@@ -14,7 +14,7 @@ public static class WebApplicationExtensions
             .MapGroup($"/api/{groupName}")
             .WithGroupName(groupName)
             .WithTags(groupName)
-            .WithOpenApi();
+            .WithOpenApi(); //Cân nhắc bỏ đi nếu nâng lên .NET 9 
     }
     
     //Vai trò: Tìm các class kế thừa từ EndpointGroupBase và gọi hàm Map của EndpointGroupBase

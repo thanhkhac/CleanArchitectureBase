@@ -2,6 +2,7 @@
 using CleanArchitectureBase.Application.Common.Exceptions;
 using CleanArchitectureBase.Application.Common.Interfaces;
 using CleanArchitectureBase.Application.Common.Security;
+using CleanArchitectureBase.Domain.Constants;
 
 namespace CleanArchitectureBase.Application.Common.Behaviours;
 
@@ -55,7 +56,7 @@ public class AuthorizationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRe
                 // Must be a member of at least one role in roles
                 if (!authorized)
                 {
-                    throw new ForbiddenAccessException();
+                    throw new ErrorCodeException(ErrorCodes.COMMON_FORBIDDEN);
                 }
             }
 
@@ -69,7 +70,7 @@ public class AuthorizationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRe
 
                     if (!authorized)
                     {
-                        throw new ForbiddenAccessException();
+                        throw new ErrorCodeException(ErrorCodes.COMMON_FORBIDDEN);
                     }
                 }
             }

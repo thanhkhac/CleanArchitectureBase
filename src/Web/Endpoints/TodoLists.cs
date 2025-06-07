@@ -37,6 +37,6 @@ public class TodoLists : EndpointGroupBase
     public async Task<IResult> DeleteTodoList(ISender sender, int id)
     {
         await sender.Send(new DeleteTodoListCommand(id));
-        return Results.NoContent();
+        return Results.Ok("hello");
     }
 }

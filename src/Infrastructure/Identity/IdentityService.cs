@@ -3,6 +3,7 @@ using CleanArchitectureBase.Application.Common.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace CleanArchitectureBase.Infrastructure.Identity;
 
@@ -15,7 +16,10 @@ public class IdentityService : IIdentityService
     public IdentityService(
         UserManager<ApplicationUser> userManager,
         IUserClaimsPrincipalFactory<ApplicationUser> userClaimsPrincipalFactory,
-        IAuthorizationService authorizationService)
+        IAuthorizationService authorizationService,
+        SignInManager<ApplicationUser> signInManager,
+        IConfiguration configuration
+        )
     {
         _userManager = userManager;
         _userClaimsPrincipalFactory = userClaimsPrincipalFactory;
@@ -75,4 +79,6 @@ public class IdentityService : IIdentityService
 
         return result.ToApplicationResult();
     }
+    
+    
 }

@@ -1,4 +1,6 @@
+using CleanArchitectureBase.Application;
 using CleanArchitectureBase.Infrastructure.Data;
+using NSwag.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +32,7 @@ app.UseSwaggerUi(settings =>
 {
     settings.Path = "/api";
     settings.DocumentPath = "/api/specification.json";
+    settings.DocExpansion = "list"; //none/list/full
 });
 
 app.MapControllerRoute(

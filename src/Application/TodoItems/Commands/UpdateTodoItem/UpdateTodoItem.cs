@@ -11,6 +11,17 @@ public record UpdateTodoItemCommand : IRequest
     public bool Done { get; init; }
 }
 
+public class UpdateTodoItemCommandValidator : AbstractValidator<UpdateTodoItemCommand>
+{
+    public UpdateTodoItemCommandValidator()
+    {
+        RuleFor(v => v.Title)
+            .MaximumLength(200)
+            .NotEmpty();
+    }
+}
+
+
 public class UpdateTodoItemCommandHandler : IRequestHandler<UpdateTodoItemCommand>
 {
     private readonly IApplicationDbContext _context;
